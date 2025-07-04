@@ -1,23 +1,23 @@
 import React from "react";
 import './style/Hero.css';
 import jugos from "../assets/img/jugos.png";
-import logo from "../assets/img/logo.png"; 
-import { FaHome, FaUtensils, FaStar, FaUser, FaShoppingCart,FaArrowRight,FaArrowLeft } from "react-icons/fa";
+import logo from "../assets/img/logo.png";
+import { FaHome, FaUtensils, FaStar, FaUser, FaShoppingCart, FaArrowRight, FaArrowLeft } from "react-icons/fa";
 
 export default function Hero() {
   return (
     <div className="hero-container">
       {/* Navbar */}
       <nav className="navbar">
-         <div className="logo">
-         <img src={logo} alt="Logo Sabor del Sol" className="logo-img" />
+        <div className="logo">
+          <img src={logo} alt="Logo Sabor del Sol" className="logo-img" />
         </div>
         <ul className="nav-links">
-        <li><FaHome className="icono"/> Inicio</li>
-        <li><FaUtensils className="icono" /> Catálogo</li>
-        <li><FaStar className="icono" /> Promociones</li>
-        <li><FaUser className="icono"/></li> 
-        <li><FaShoppingCart className="icono"/></li> 
+          <li><FaHome className="icono" /> Inicio</li>
+          <li><FaUtensils className="icono" /> Catálogo</li>
+          <li><FaStar className="icono" /> Promociones</li>
+          <li><FaUser className="icono" /></li>
+          <li><FaShoppingCart className="icono" /></li>
         </ul>
       </nav>
 
@@ -41,7 +41,7 @@ export default function Hero() {
 
       {/* Slider */}
       <div className="slider">
-        <button className="slider-btn"><FaArrowLeft className="icono"/></button>
+        <button className="slider-btn"><FaArrowLeft className="icono" /></button>
         <div className="slider-items">
           {[1, 2, 3, 4].map((item, index) => (
             <div key={index} className="slider-item">
@@ -53,7 +53,7 @@ export default function Hero() {
             </div>
           ))}
         </div>
-        <button className="slider-btn"><FaArrowRight className="icono"/></button>
+        <button className="slider-btn"><FaArrowRight className="icono" /></button>
       </div>
     </div>
   );
