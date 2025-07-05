@@ -28,4 +28,7 @@ public class DetallePedido {
 
     private Double subtotal;
 
+    @Column(length = 200)
+    private String descripcionPersonalizada;
+
 }

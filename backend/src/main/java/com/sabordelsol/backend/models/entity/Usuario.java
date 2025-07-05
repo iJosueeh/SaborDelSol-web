@@ -24,7 +24,7 @@ public class Usuario {
     private String correo;
 
     @Column(nullable = false)
-    private String contraseña;
+    private String password;
 
     @Column(nullable = false)
     private String rol;

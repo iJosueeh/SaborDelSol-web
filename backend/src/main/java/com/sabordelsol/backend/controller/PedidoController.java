@@ -1,11 +1,14 @@
 package com.sabordelsol.backend.controller;
 
+import com.sabordelsol.backend.models.dto.PedidoDTO;
 import com.sabordelsol.backend.models.dto.PedidoRequestDTO;
 import com.sabordelsol.backend.models.entity.Pedido;
 import com.sabordelsol.backend.services.PedidoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/pedidos")
@@ -39,6 +42,11 @@ public class PedidoController {
     public ResponseEntity<Pedido> cancelarPedido(@PathVariable Long id) {
         Pedido cancelado = pedidoService.cancelarPedido(id);
         return ResponseEntity.ok(cancelado);
+    }
+
+    @GetMapping("/mis-pedidos/{usuarioId}")
+    public ResponseEntity<List<PedidoDTO>> listarPedidosUsuario(@PathVariable Long usuarioId) {
+        return ResponseEntity.ok(pedidoService.listarPedidosPorUsuario(usuarioId));
     }
 
 }

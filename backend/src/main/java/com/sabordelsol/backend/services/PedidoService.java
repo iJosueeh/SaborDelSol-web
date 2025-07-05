@@ -6,6 +6,11 @@ import com.sabordelsol.backend.command.concrete.ConfirmarPedidoCommand;
 import com.sabordelsol.backend.command.concrete.QuitarProductoCommand;
 import com.sabordelsol.backend.command.executor.PedidoInvoker;
 import com.sabordelsol.backend.command.interfaces.PedidoCommand;
+import com.sabordelsol.backend.decorator.BebidaBase;
+import com.sabordelsol.backend.decorator.BebidaConcreta;
+import com.sabordelsol.backend.decorator.IngredienteExtraDecorator;
+import com.sabordelsol.backend.models.dto.DetallePedidoDTO;
+import com.sabordelsol.backend.models.dto.PedidoDTO;
 import com.sabordelsol.backend.models.dto.PedidoRequestDTO;
 import com.sabordelsol.backend.models.entity.*;
 import com.sabordelsol.backend.repository.*;
@@ -22,7 +27,6 @@ public class PedidoService {
 
     private final PedidoRepository pedidoRepo;
     private final DetallePedidoRepository detalleRepo;
-    private final ComboRepository comboRepo;
     private final UsuarioRepository usuarioRepo;
     private final BebidaRepository bebidaRepo;
     private final IngredienteExtraRepository ingredienteRepo;
@@ -46,22 +50,28 @@ public class PedidoService {
             Bebida bebida = bebidaRepo.findById(b.getBebidaId())
                     .orElseThrow(() -> new RuntimeException("Bebida no encontrada"));
 
-            double precioFinal = bebida.getPrecioBase();
+            // Decorator aplicado
+            BebidaBase bebidaFinal = new BebidaConcreta(bebida);
 
-            // Calcular precio usando Decorator (simulado)
             if (b.getIngredientesExtras() != null) {
-                for (Long ingId : b.getIngredientesExtras()) {
-                    IngredienteExtra ing = ingredienteRepo.findById(ingId)
+                for (Long idExtra : b.getIngredientesExtras()) {
+                    IngredienteExtra extra = ingredienteRepo.findById(idExtra)
                             .orElseThrow(() -> new RuntimeException("Ingrediente no encontrado"));
-                    precioFinal += ing.getPrecioExtra();
+                    bebidaFinal = new IngredienteExtraDecorator(bebidaFinal, extra);
                 }
             }
 
-            PedidoCommand comando = new AgregarProductoCommand(pedido, bebida, b.getCantidad(), precioFinal);
+            double precioFinal = bebidaFinal.getPrecio();
+            double subtotal = precioFinal * b.getCantidad();
+            String descripcionFinal = bebidaFinal.getDescripcion();
+
+            PedidoCommand comando = new AgregarProductoCommand(pedido, bebida, b.getCantidad(), precioFinal, descripcionFinal);
             invoker.ejecutar(comando);
+
+            System.out.println("Pedido: " + bebidaFinal.getDescripcion() + " | Total por unidad: S/ " + precioFinal);
         }
 
-        // Aplicar promoción (Strategy Pattern)
+        // Aplicar promoción si hay (Strategy)
         List<Promocion> promociones = promoRepo.findByActivaTrue();
         if (!promociones.isEmpty()) {
             double descuento = promociones.getFirst().getDescuento();
@@ -124,6 +134,31 @@ public class PedidoService {
         invoker.ejecutar(cancelar);
 
         return pedidoRepo.save(pedido);
+    }
+
+    public List<PedidoDTO> listarPedidosPorUsuario(Long usuarioId) {
+        List<Pedido> pedidos = pedidoRepo.findByUsuarioId(usuarioId);
+
+        return pedidos.stream().map(pedido -> {
+            PedidoDTO dto = new PedidoDTO();
+            dto.setId(pedido.getId());
+            dto.setFecha(pedido.getFecha());
+            dto.setEstado(pedido.getEstado());
+            dto.setTotal(pedido.getTotal());
+
+            List<DetallePedidoDTO> detalles = pedido.getDetalles().stream().map(detalle -> {
+                DetallePedidoDTO d = new DetallePedidoDTO();
+                d.setBebidaId(detalle.getBebida().getId());
+                d.setNombreBebida(detalle.getBebida().getNombre());
+                d.setCantidad(detalle.getCantidad());
+                d.setSubtotal(detalle.getSubtotal());
+                d.setDescripcionPersonalizada(detalle.getDescripcionPersonalizada());
+                return d;
+            }).toList();
+
+            dto.setDetalles(detalles);
+            return dto;
+        }).toList();
     }
 
 }

@@ -13,6 +13,7 @@ public class AgregarProductoCommand implements PedidoCommand {
     private final Bebida bebida;
     private final int cantidad;
     private final double precioFinal;
+    private final String descripcionPersonalizada;
 
     @Override
     public void ejecutar() {
@@ -21,6 +22,7 @@ public class AgregarProductoCommand implements PedidoCommand {
                 .bebida(bebida)
                 .cantidad(cantidad)
                 .subtotal(precioFinal * cantidad)
+                .descripcionPersonalizada(descripcionPersonalizada)
                 .build();
 
         pedido.getDetalles().add(detalle);
