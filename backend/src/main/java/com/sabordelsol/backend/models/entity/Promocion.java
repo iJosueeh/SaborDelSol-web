@@ -14,12 +14,14 @@ public class Promocion {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(columnDefinition = "INT")
     private Long id;
 
     private String titulo;
 
     private String descripcion;
 
+    @Column(columnDefinition = "DECIMAL(5,2)")
     private Double descuento;
 
     private Boolean activa;

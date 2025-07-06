@@ -14,6 +14,7 @@ public class DetallePedido {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(columnDefinition = "INT")
     private Long id;
 
     @ManyToOne
@@ -26,9 +27,10 @@ public class DetallePedido {
 
     private Integer cantidad;
 
+    @Column(columnDefinition = "DECIMAL(10,2)")
     private Double subtotal;
 
-    @Column(length = 200)
+    @Column(length = 200, nullable = true)
     private String descripcionPersonalizada;
 
 }

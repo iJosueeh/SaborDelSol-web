@@ -17,11 +17,12 @@ public class IngredienteExtra {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(columnDefinition = "INT")
     private Long id;
 
     private String nombre;
 
-    @Column(name = "precio_extra", nullable = false)
+    @Column(name = "precio_extra", nullable = false, columnDefinition = "DECIMAL(10,2)")
     private Double precioExtra;
 
     @ManyToMany(mappedBy = "ingredientesExtras")

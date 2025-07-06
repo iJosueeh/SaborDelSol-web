@@ -14,6 +14,7 @@ public class ComboItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(columnDefinition = "INT")
     private Long id;
 
     @ManyToOne
@@ -21,6 +22,7 @@ public class ComboItem {
     private Combo combo;
 
     private String tipoItem;
+    @Column(name = "item_id", columnDefinition = "INT")
     private Long itemId;
 
 }

@@ -17,6 +17,7 @@ public class Pedido {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(columnDefinition = "INT")
     private Long id;
 
     @ManyToOne
@@ -25,6 +26,7 @@ public class Pedido {
 
     private LocalDateTime fecha;
 
+    @Column(columnDefinition = "DECIMAL(10,2)")
     private Double total;
 
     private String estado; // "EN PROCESO", "ENTREGADO", etc.

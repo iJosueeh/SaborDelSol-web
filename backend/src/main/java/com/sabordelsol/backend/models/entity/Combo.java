@@ -16,10 +16,12 @@ public class Combo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(columnDefinition = "INT")
     private Long id;
 
     private String nombre;
     private String descripcion;
+    @Column(columnDefinition = "DECIMAL(10,2)")
     private Double precio;
 
     @OneToMany(mappedBy = "combo", cascade = CascadeType.ALL)

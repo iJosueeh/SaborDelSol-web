@@ -17,13 +17,14 @@ public class Bebida {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(columnDefinition = "INT")
     private Long id;
 
     private String nombre;
 
     private String tipo; // ej: jugo, batido, etc.
 
-    @Column(name = "precio_base", nullable = false)
+    @Column(name = "precio_base", nullable = false, columnDefinition = "DECIMAL(10,2)")
     private Double precioBase;
 
     private Boolean estado;
