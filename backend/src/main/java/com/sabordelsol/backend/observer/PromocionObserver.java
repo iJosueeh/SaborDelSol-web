@@ -2,6 +2,6 @@ package com.sabordelsol.backend.observer;
 
 import java.io.IOException;
 
-public interface ClienteObserver {
+public interface PromocionObserver {
     void notificar(String mensaje) throws IOException;
 }

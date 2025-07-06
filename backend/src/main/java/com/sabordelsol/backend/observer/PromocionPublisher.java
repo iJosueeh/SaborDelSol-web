@@ -1,7 +1,9 @@
 package com.sabordelsol.backend.observer;
 
 import org.springframework.stereotype.Component;
+import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -22,10 +24,10 @@ public class PromocionPublisher {
         for (ClienteSseObserver observer : observadores) {
             try {
                 observer.notificar(mensaje);
-            } catch (Exception e) {
+            } catch (IOException e) {
                 eliminar(observer);
             }
         }
     }
-
 }
+

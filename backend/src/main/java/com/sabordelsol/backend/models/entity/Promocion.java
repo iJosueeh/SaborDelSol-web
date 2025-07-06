@@ -26,4 +26,6 @@ public class Promocion {
 
     private Boolean activa;
 
+    private String tipo;
+
 }

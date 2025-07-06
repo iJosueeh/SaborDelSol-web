@@ -35,6 +35,8 @@ public class SecurityConfig {
                         .hasRole("ADMIN")
                         .requestMatchers("/api/pedidos/**", "/api/notificaciones/**")
                         .hasRole("CLIENTE")
+                        .requestMatchers("/api/pedidos/dashboard/**")
+                        .hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session

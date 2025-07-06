@@ -26,8 +26,10 @@ public class NotificationController {
 
         emitter.onCompletion(() -> publisher.eliminar(observer));
         emitter.onTimeout(() -> publisher.eliminar(observer));
+        emitter.onError(e -> publisher.eliminar(observer));
 
         return emitter;
     }
+
 
 }
