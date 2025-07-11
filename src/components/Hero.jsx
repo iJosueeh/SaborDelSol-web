@@ -77,6 +77,8 @@ export default function Hero() {
             </button>
           </div>
         </div>
+        <button className="slider-btn"><FaArrowRight className="icono" /></button>
+      </div>
 
       
     </div>
