@@ -80,7 +80,5 @@ export default function Hero() {
         <button className="slider-btn"><FaArrowRight className="icono" /></button>
       </div>
 
-      
-    </div>
   );
 }
