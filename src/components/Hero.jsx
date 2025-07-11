@@ -15,7 +15,7 @@ export default function Hero() {
         background: "linear-gradient(to right, #fdf0e4, #ffb19e)",
       }}
     >
-      {/* Hero principal */}
+      
       <div className="container-fluid px-5 d-flex flex-column flex-lg-row align-items-center justify-content-between position-relative" >
         
         <div className="text-center text-lg-start mb-4 mb-lg-0">
@@ -77,7 +77,6 @@ export default function Hero() {
             </button>
           </div>
         </div>
-        <button className="slider-btn"><FaArrowRight className="icono" /></button>
       </div>
 
   );

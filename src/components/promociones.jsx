@@ -40,7 +40,6 @@ export default function Promociones() {
                 className="hojita-decorativa"
             />
 
-            {/* Tarjeta */}
             <div className="card h-100 shadow-sm promo-card">
                 <img src={bebida1} className="card-img-top" alt="Promoción 1" />
                 <div className="card-body">
