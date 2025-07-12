@@ -4,6 +4,7 @@ import Promociones from './components/promociones';
 import About from './components/about';
 import Catalogo from './components/catalogo';
 import './App.css';
+import Footer from './components/footer';
 
 function App() {
   return (
@@ -25,9 +26,12 @@ function App() {
       <div id="catalogo">
         <Catalogo />
       </div>
-
-
       
+      <div id="footer">
+     <Footer />
+     </div>
+
+
     </div>
   );
 }

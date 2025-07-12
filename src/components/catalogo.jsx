@@ -62,7 +62,6 @@ export default function Catalogo() {
           CATÁLOGO
         </h2>
 
-        {/* Carrusel de productos */}
         <Slider {...settings}>
           {productos.map((producto, index) => (
             <div key={index} className="px-3">

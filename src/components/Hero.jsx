@@ -32,12 +32,17 @@ export default function Hero() {
               borderRadius: "20px",
               padding: "10px 20px",
             }}>Ver Carta</button>
-            <button className="btn" style={{
-              backgroundColor: "#f95d1f",
-              color: "white",
-              borderRadius: "20px",
-              padding: "10px 20px",
-            }}>Contactar</button>
+            <a href="#footer" style={{
+            backgroundColor: "#f95d1f",
+            color: "white",
+            borderRadius: "20px",
+            padding: "10px 20px",
+            textDecoration: "none",
+            display: "inline-block"
+          }}>
+            Contactar
+          </a>
+
           </div>
         </div>
         
